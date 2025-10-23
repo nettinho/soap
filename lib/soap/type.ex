@@ -5,14 +5,12 @@ defmodule Soap.Type do
 
   import SweetXml, except: [parse: 1]
 
-  @spec get_complex_types(String.t(), String.t()) :: map()
   def get_complex_types(wsdl, x_path) do
     wsdl
     |> xpath(~x"#{x_path}"l)
     |> Enum.reduce(%{}, &parse_types/2)
   end
 
-  @spec parse_types(map(), map()) :: map()
   defp parse_types(type_node, complex_type_acc) do
     types_map =
       type_node
@@ -22,7 +20,6 @@ defmodule Soap.Type do
     Map.put(complex_type_acc, type_node |> xpath(~x"./@name"s) |> String.downcase(), types_map)
   end
 
-  @spec parse_type_attributes(map(), map()) :: map()
   defp parse_type_attributes(inner_node, element_acc) do
     result_map =
       [:nillable, :minOccurs, :maxOccurs]

@@ -28,3 +28,6 @@ soap-*.tar
 # Misc.
 /priv
 /.DS_Store
+
+.elixir_ls/
+.cursor/
